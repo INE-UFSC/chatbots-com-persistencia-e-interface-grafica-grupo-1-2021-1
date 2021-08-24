@@ -1,0 +1,26 @@
+{
+  "id": 1,
+  "nome": "Redy",
+  "comandos": [
+    {
+      "id": 1,
+      "msg": "Boas vindas",
+      "respostas": ["Opaaa, fala delee", "Como voce vai?", "Tudo certo?"]
+    },
+    {
+      "id": 2,
+      "msg": "Horario Livre",
+      "respostas": ["Live amanha, hoje to cansado", "Tá em live mula", "Hoje é rerun"]
+    },
+    {
+      "id": 3,
+      "msg": "Prime",
+      "respostas": ["Escorrega o prime marreco", "Passem as coroas"]
+    },
+    {
+      "id": 4,
+      "msg": "Agradecimento Sub",
+      "respostas": ["GOD GOD, VALEU, TAMO JUNTO", "Obrigado"]
+    }
+  ]
+}

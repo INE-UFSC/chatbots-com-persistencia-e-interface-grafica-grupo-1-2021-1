@@ -1,0 +1,16 @@
+{
+  "id": 3,
+  "nome": "Yoda",
+  "comandos": [
+    {
+      "id": 1,
+      "msg": "Boas vindas",
+      "respostas": ["Não", "Sai"]
+    },
+    {
+      "id": 2,
+      "msg": "Recomendações",
+      "respostas": ["Seu bobo", "Seu chato", "Seu sem graça"]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": 2,
+  "nome": "Sasuke XD",
+  "comandos": [
+    {
+      "id": 1,
+      "msg": "Boas vindas",
+      "respostas": ["Só vou aceitar boas vindas se você gosta de algum anime", "Youkoso!"]
+    },
+    {
+      "id": 2,
+      "msg": "Recomendações",
+      "respostas": ["School Days", "Death Note", "Demon Slayer", "Attack on titan", "One punch man"]
+    }
+  ]
+}
