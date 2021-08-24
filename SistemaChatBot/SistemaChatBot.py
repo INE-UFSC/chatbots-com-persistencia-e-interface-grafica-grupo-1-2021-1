@@ -1,37 +1,81 @@
-from Bots.Bot import Bot
+from typing import List
+from Entidades.Bot import Bot
 
 class SistemaChatBot:
-    def __init__(self,nomeEmpresa,lista_bots):
+    def __init__(self,nomeEmpresa,lista_bots: List[Bot]):
         self.__empresa=nomeEmpresa
-        ##verificar se a lista de bots contém apenas bots
-        self.__lista_bots=lista_bots
+        self.__lista_bots=[]
+        for bot in lista_bots:
+            if isinstance(bot, Bot):
+                self.__lista_bots.append(bot)
         self.__bot = None
     
     def boas_vindas(self):
-        pass
-        ##mostra mensagem de boas vindas do sistema
+        print(f'Olá, esse é o sistema chat bot da empresa {self.__empresa}\n')
 
     def mostra_menu(self):
-        pass
-        ##mostra o menu de escolha de bots
+        print("Os chat bots disponiveis no momento são:")
+
+        for bot in self.__lista_bots:
+            print(f'Id: {bot.id} - Bot: {bot.nome} - Mensagem de apresentação: {bot.apresentacao()}')
+        print()
     
     def escolhe_bot(self):
-        pass
-        ##faz a entrada de dados do usuário e atribui o objeto ao atributo __bot 
+        id = input("Digite o id do chat bot desejado: ")
+
+        try:
+            id = self.__parse_int(id)
+        except ValueError:
+            print("Id deve ser um inteiro!")
+            self.escolhe_bot()
+
+        for bot in self.__lista_bots:
+            if bot.id == id:
+                self.__bot = bot
+        
+        while self.__bot == None:
+            print("Bot não encontrado")
+            self.escolhe_bot()
 
     def mostra_comandos_bot(self):
-        pass
-        ##mostra os comandos disponíveis no bot escolhido
+        self.__bot.mostra_comandos()
 
     def le_envia_comando(self):
-        pass
-        ##faz a entrada de dados do usuário e executa o comando no bot ativo
+        comando = input("Digite o comando desejado (ou -1 para sair): ")
+        print()
+
+        try:
+            comando = self.__parse_int(comando)
+        except ValueError as e:
+            print("Comando deve ser um inteiro!")
+            terminar = self.le_envia_comando()
+            return terminar
+
+        if comando == -1:
+            print(self.__bot.despedida())
+            return False
+        try:
+            self.__bot.executa_comando(comando)
+        except KeyError:
+            print('Comando não existente\n')
+            terminar = self.le_envia_comando()
+            return terminar
+        return 
 
     def inicio(self):
-        pass
-        ##mostra mensagem de boas-vindas do sistema
-        ##mostra o menu ao usuário
-        ##escolha do bot      
-        ##mostra mensagens de boas-vindas do bot escolhido
-        ##entra no loop de mostrar comandos do bot e escolher comando do bot até o usuário definir a saída
-        ##ao sair mostrar a mensagem de despedida do bot
+        self.boas_vindas()
+        self.mostra_menu()
+        self.escolhe_bot()
+        while True:
+            self.mostra_comandos_bot()
+            print()
+            retorno = self.le_envia_comando()
+            if retorno == False:
+                break
+    
+    def __parse_int(self, valor):
+        try:
+            return int(valor)
+        except ValueError as e:
+            print(f'Erro ao parsear inteiro')
+            raise e
