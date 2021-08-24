@@ -1,5 +1,5 @@
 from DAO import DAO
-from Bot import Bot
+from Entidades.Bot import Bot
 
 class BotDAO(DAO):
     def add(self, bot: Bot):

@@ -1,23 +1,19 @@
-##implemente as seguintes classes
-
-from abc import ABC, abstractmethod
 import random as r
 from Entidades.Comando import Comando
 
-class Bot(ABC):
-    @abstractmethod
+class Bot():
     def __init__(self, nome, comandos: Comando, id):
-        self.nome = nome
+        self.__nome = nome
         self.comandos = comandos
         self.id = id
 
-    @abstractmethod
+    @property
     def nome(self):
-        pass
+        return self.__nome
 
-    @abstractmethod
-    def nome(nome):
-        pass
+    @nome.setter
+    def nome(self, nome):
+        self.__nome = nome
 
     def mostra_comandos(self):
         print()
@@ -34,6 +30,8 @@ class Bot(ABC):
         if not respondeu:
             raise KeyError
     
-    @abstractmethod
-    def despedida():
-        pass
+    def apresentacao(self, mensagem):
+        return f'Meu nome é {self.__nome}. {mensagem}'
+
+    def despedida(self, mensagem):
+        return f'--> {self.__nome} {mensagem}'
