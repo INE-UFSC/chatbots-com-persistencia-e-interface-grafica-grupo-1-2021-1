@@ -1,20 +1,16 @@
-import pickle
+import json
 from abc import ABC
 
 class DAO(ABC):
-    def __init__(self,datasource=''):
-        self.datasource = datasource
+    def __init__(self):
+        self.datasource = ''
         self.objectCache = {}
-        try:
-            self.__load()
-        except FileNotFoundError:
-            self.__dump()
 
     def __dump(self):
-        pickle.dump(self.objectCache, open(self.datasource, 'wb'))
+        json.dump(self.objectCache, open(self.datasource, 'wb'))
 
     def __load(self):
-        self.objectCache = pickle.load(open(self.datasource, 'rb'))
+        self.objectCache = json.load(open(self.datasource, 'rb'))
 
     def add(self, key, obj):
         self.objectCache[key] = obj
@@ -36,3 +32,9 @@ class DAO(ABC):
     
     def get_all(self):
         return self.objectCache.values()
+    
+    def import_source(self, path: str):
+        self.datasource = path
+        with open(self.datasource, 'r') as f:
+            data = json.load(f)
+        print(data)

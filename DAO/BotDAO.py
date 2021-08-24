@@ -1,7 +1,10 @@
-from DAO import DAO
+from DAO.DAO import DAO
 from Entidades.Bot import Bot
 
 class BotDAO(DAO):
+    def __init__(self):
+        super().__init__()
+
     def add(self, bot: Bot):
         if (bot is not None) and (isinstance(bot.codigo, int)) and (isinstance(bot, Bot)):
             super().add(bot.codigo, bot)

@@ -1,19 +1,18 @@
 import PySimpleGUI as sg
-from botDAO import BotDAO
-from Bot import Bot
+from DAO.BotDAO import BotDAO
+from Entidades.Bot import Bot
 
 class BotView():
     def __init__(self):
         self.__container = []
-        self.__window = sg.Window("ChatBot", self.__container, fon=("Helvetica", 14))
-        self.__botDAO = BotDAO
+        self.__window = sg.Window("ChatBot", self.__container, font=("Helvetica", 14))
+        self.__botDAO = BotDAO()
 
-    def tela_bot(self):
+    def tela_consulta(self):
         self.__container = [
-                            [sg.Text('Escolha com qual bot você deseja conversar')],
-                            
+            [sg.Text('Escolha com qual bot você deseja conversar'), sg.Button('Importar')],     
         ]
-
+        self.__window = sg.Window('Chat bot', self.__container ,font=('Helvetica', 14))
 
     def listar(self):
         bots = [str(i) for i in self.__botDAO.get_all()]
