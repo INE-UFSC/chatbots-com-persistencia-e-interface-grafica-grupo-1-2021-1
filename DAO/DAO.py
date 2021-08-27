@@ -37,4 +37,4 @@ class DAO(ABC):
         self.datasource = path
         with open(self.datasource, 'r') as f:
             data = json.load(f)
-        print(data)
+        self.objectCache = data

@@ -12,7 +12,7 @@ class Comando:
         return self.id
 
     @property
-    def mensagem(self):
+    def msg(self):
         return self.__msg
 
     def __str__(self):

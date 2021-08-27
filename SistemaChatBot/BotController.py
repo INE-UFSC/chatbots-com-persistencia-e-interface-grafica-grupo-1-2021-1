@@ -2,6 +2,7 @@ from Interface.BotView import BotView
 from Interface.ImportView import ImportView
 from Entidades.Bot import Bot
 from DAO.BotDAO import BotDAO
+from Entidades.Comando import Comando
 import PySimpleGUI as sg 
 
 class BotController:
@@ -29,7 +30,6 @@ class BotController:
                     break
                 else:
                     if event == 'Importar':
-                        print("Tá coisando")
                         import_active = True
 
     def handle_import(self):
@@ -46,5 +46,16 @@ class BotController:
                 self.__botDAO.import_source(path)
                 self.__telaImport.fim()
                 import_active = False
-
+        self.instanciando_bot()
         return import_active
+
+    def instanciando_bot(self):
+        comandos = []
+        for comando in self.__botDAO.objectCache["comandos"]:
+            comandos.append(Comando(comando["id"], comando["msg"], comando["respostas"]))
+        self.bot = Bot(self.__botDAO.objectCache["nome"], comandos, self.__botDAO.objectCache["id"])
+        self.update_tela()
+
+    def update_tela(self):
+        self.__telaBot.update_tela(self.bot)
+        

@@ -23,3 +23,11 @@ class BotView():
 
     def fim(self):
         self.__window.close()
+    
+    def update_tela(self, bot):
+        botoes = []
+        for comando in bot.comandos:
+            botao = sg.Button(comando.msg, key=comando.id)
+            botoes.append(botao)
+        self.__container = [botoes]
+        self.__window = sg.Window('Chat bot', self.__container ,font=('Helvetica', 14))
