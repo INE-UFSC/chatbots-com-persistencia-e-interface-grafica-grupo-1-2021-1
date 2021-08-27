@@ -31,6 +31,9 @@ class BotController:
                 else:
                     if event == 'Importar':
                         import_active = True
+                    elif (isinstance(event, int)):
+                        resposta = self.bot.executa_comando(event)
+                        self.__telaBot.update_resposta(resposta)
 
     def handle_import(self):
         self.__telaImport.tela_consulta()
@@ -43,8 +46,8 @@ class BotController:
             import_active = False
         elif event_exp == 'importar':
                 path = values_exp['caminho_import']
-                self.__botDAO.import_source(path)
                 self.__telaImport.fim()
+                self.__botDAO.import_source(path)
                 import_active = False
         self.instanciando_bot()
         return import_active

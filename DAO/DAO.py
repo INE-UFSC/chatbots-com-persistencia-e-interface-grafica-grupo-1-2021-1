@@ -35,6 +35,6 @@ class DAO(ABC):
     
     def import_source(self, path: str):
         self.datasource = path
-        with open(self.datasource, 'r') as f:
+        with open(self.datasource, 'r', encoding='utf-8') as f:
             data = json.load(f)
         self.objectCache = data

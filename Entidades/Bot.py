@@ -21,14 +21,9 @@ class Bot():
             print(comandos)
 
     def executa_comando(self,id):
-        respondeu = False
         for comando in self.comandos:
             if comando.id == id:
-                print(f'--> {self.nome} diz: {comando.getRandomResposta()}')
-                respondeu = True
-                break
-        if not respondeu:
-            raise KeyError
+                return (f'--> {self.nome} diz: {comando.getRandomResposta()}')
     
     def apresentacao(self, mensagem):
         return f'Meu nome é {self.__nome}. {mensagem}'
